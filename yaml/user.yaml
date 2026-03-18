@@ -1,0 +1,146 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: planit-user-config
+  namespace: planit
+data:
+  SERVER_PORT: "8081"
+  GRPC_SERVER_PORT: "9091"
+  PLANIT_USER_DB_URL: "jdbc:mariadb://pi-dev-mariadb.cbok2weui317.ap-northeast-2.rds.amazonaws.com:3306/planit_user_db"
+  PLANIT_REDIS_HOST: "planit-redis-svc"
+  PLANIT_CORS_ALLOWED_ORIGINS: "https://barumi-planit.store,http://localhost:3000,http://localhost:5173"
+  SPRING_DATASOURCE_URL: "jdbc:mariadb://pi-dev-mariadb.cbok2weui317.ap-northeast-2.rds.amazonaws.com:3306/planit_user_db"
+  REDIS_HOST: "planit-redis-svc"
+  REDIS_PORT: "6379"
+  AWS_REGION: "ap-northeast-2"
+  COGNITO_USER_POOL_ID: "ap-northeast-2_GKpckavjT"
+  COGNITO_CLIENT_ID: "6fjoogcqkvntfr9id76geuk2m7"
+  SPRING_PROFILES_ACTIVE: "dev"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: planit-user-svc
+  namespace: planit
+spec:
+  selector:
+    app: user
+  ports:
+    - name: http
+      port: 8081
+      targetPort: 8081
+    - name: grpc
+      port: 9091
+      targetPort: 9091
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: planit-user-deploy
+  namespace: planit
+spec:
+  selector:
+    matchLabels:
+      app: user
+  template:
+    metadata:
+      labels:
+        app: user
+    spec:
+      containers:
+      - name: user
+        image: jybill01/planit-user:v0.1
+        ports:
+        - containerPort: 8081
+        - containerPort: 9091
+        env:
+        - name: SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: planit-user-config
+              key: SERVER_PORT
+        - name: GRPC_SERVER_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: planit-user-config
+              key: GRPC_SERVER_PORT
+        - name: PLANIT_USER_DB_URL
+          valueFrom:
+            configMapKeyRef:
+              name: planit-user-config
+              key: PLANIT_USER_DB_URL
+        - name: PLANIT_REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: planit-user-config
+              key: PLANIT_REDIS_HOST
+        - name: PLANIT_CORS_ALLOWED_ORIGINS
+          valueFrom:
+            configMapKeyRef:
+              name: planit-user-config
+              key: PLANIT_CORS_ALLOWED_ORIGINS
+        - name: SPRING_DATASOURCE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: planit-user-config
+              key: SPRING_DATASOURCE_URL
+        - name: REDIS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: planit-user-config
+              key: REDIS_HOST
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: planit-user-config
+              key: REDIS_PORT
+        - name: AWS_REGION
+          valueFrom:
+            configMapKeyRef:
+              name: planit-user-config
+              key: AWS_REGION
+        - name: COGNITO_USER_POOL_ID
+          valueFrom:
+            configMapKeyRef:
+              name: planit-user-config
+              key: COGNITO_USER_POOL_ID
+        - name: COGNITO_CLIENT_ID
+          valueFrom:
+            configMapKeyRef:
+              name: planit-user-config
+              key: COGNITO_CLIENT_ID
+        - name: SPRING_PROFILES_ACTIVE
+          valueFrom:
+            configMapKeyRef:
+              name: planit-user-config
+              key: SPRING_PROFILES_ACTIVE
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: planit-app-secrets
+              key: SPRING_DATASOURCE_USERNAME
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: planit-app-secrets
+              key: SPRING_DATASOURCE_PASSWORD
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: planit-app-secrets
+              key: JWT_SECRET
+        - name: AWS_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: planit-app-secrets
+              key: AWS_ACCESS_KEY
+        - name: AWS_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: planit-app-secrets
+              key: AWS_SECRET_KEY
+        - name: COGNITO_CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: planit-app-secrets
+              key: COGNITO_CLIENT_SECRET

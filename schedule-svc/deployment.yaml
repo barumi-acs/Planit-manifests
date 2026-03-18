@@ -1,0 +1,62 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: planit-schedule-svc
+  namespace: planit
+spec:
+  selector:
+    app: schedule
+  ports:
+    - name: http
+      port: 8082
+      targetPort: 8082
+    - name: grpc
+      port: 9092
+      targetPort: 9092
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: planit-schedule-deploy
+  namespace: planit
+spec:
+  selector:
+    matchLabels:
+      app: schedule
+  template:
+    metadata:
+      labels:
+        app: schedule
+    spec:
+      serviceAccountName: planit-app-sa
+      volumes:
+        - name: secrets-store
+          csi:
+            driver: secrets-store.csi.k8s.io
+            readOnly: true
+            volumeAttributes:
+              secretProviderClass: planit-aws-secrets
+      containers:
+      - name: schedule
+        image: jybill01/planit-schedule:v0.3
+        ports:
+        - containerPort: 8082
+        - containerPort: 9092
+        volumeMounts:
+          - name: secrets-store
+            mountPath: /mnt/secrets-store
+            readOnly: true
+        envFrom:
+          - configMapRef:
+              name: planit-schedule-config
+        env:
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: planit-app-secrets
+              key: SPRING_DATASOURCE_USERNAME
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: planit-app-secrets
+              key: SPRING_DATASOURCE_PASSWORD

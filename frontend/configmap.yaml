@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: planit-front-config
+  namespace: planit
+data:
+  VITE_USER_SERVICE_URL: "https://barumi-planit.store/api/v1/users"
+  VITE_SCHEDULE_SERVICE_URL: "https://barumi-planit.store/api/v1/schedules"
+  VITE_INTELLIGENCE_SERVICE_URL: "https://barumi-planit.store/api/v1/strategy"
+  VITE_INSIGHT_SERVICE_URL: "https://barumi-planit.store/api/v1/insight"
+  VITE_COGNITO_USER_POOL_ID: "ap-northeast-2_GKpckavjT"
+  VITE_COGNITO_CLIENT_ID: "6fjoogcqkvntfr9id76geuk2m7"
+  VITE_COGNITO_REGION: "ap-northeast-2"
+  VITE_COGNITO_DOMAIN: "ap-northeast-2gkpckavjt.auth.ap-northeast-2.amazoncognito.com"
+  VITE_COGNITO_REDIRECT_URI: "https://barumi-planit.store/auth/callback"
