@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: planit-insightai-config
-  namespace: planit
+  namespace: planit-dev
 data:
   APP_MODE: "grpc"
   PORT: "8085"

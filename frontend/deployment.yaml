@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: planit-front-svc
-  namespace: planit
+  namespace: planit-dev
 spec:
   type: NodePort
   selector:
@@ -16,7 +16,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: planit-front-deploy
-  namespace: planit
+  namespace: planit-dev
 spec:
   replicas: 1
   selector:
@@ -26,55 +26,14 @@ spec:
     metadata:
       labels:
         app: front
+        tier: frontend
+        env: dev
     spec:
       containers:
       - name: front
         image: jybill01/planit-front:v0.9
         ports:
         - containerPort: 80
-        env:
-        - name: VITE_USER_SERVICE_URL
-          valueFrom:
-            configMapKeyRef:
+        envFrom:
+          - configMapRef:
               name: planit-front-config
-              key: VITE_USER_SERVICE_URL
-        - name: VITE_SCHEDULE_SERVICE_URL
-          valueFrom:
-            configMapKeyRef:
-              name: planit-front-config
-              key: VITE_SCHEDULE_SERVICE_URL
-        - name: VITE_INTELLIGENCE_SERVICE_URL
-          valueFrom:
-            configMapKeyRef:
-              name: planit-front-config
-              key: VITE_INTELLIGENCE_SERVICE_URL
-        - name: VITE_INSIGHT_SERVICE_URL
-          valueFrom:
-            configMapKeyRef:
-              name: planit-front-config
-              key: VITE_INSIGHT_SERVICE_URL
-        - name: VITE_COGNITO_USER_POOL_ID
-          valueFrom:
-            configMapKeyRef:
-              name: planit-front-config
-              key: VITE_COGNITO_USER_POOL_ID
-        - name: VITE_COGNITO_CLIENT_ID
-          valueFrom:
-            configMapKeyRef:
-              name: planit-front-config
-              key: VITE_COGNITO_CLIENT_ID
-        - name: VITE_COGNITO_REGION
-          valueFrom:
-            configMapKeyRef:
-              name: planit-front-config
-              key: VITE_COGNITO_REGION
-        - name: VITE_COGNITO_DOMAIN
-          valueFrom:
-            configMapKeyRef:
-              name: planit-front-config
-              key: VITE_COGNITO_DOMAIN
-        - name: VITE_COGNITO_REDIRECT_URI
-          valueFrom:
-            configMapKeyRef:
-              name: planit-front-config
-              key: VITE_COGNITO_REDIRECT_URI

@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: planit-front-config
-  namespace: planit
+  namespace: planit-dev
 data:
   VITE_USER_SERVICE_URL: "https://barumi-planit.store/api/v1/users"
   VITE_SCHEDULE_SERVICE_URL: "https://barumi-planit.store/api/v1/schedules"
