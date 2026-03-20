@@ -6,11 +6,11 @@ metadata:
 data:
   SERVER_PORT: "8083"
   GRPC_SERVER_PORT: "9093"
-  PLANIT_STRATEGY_DB_URL: "jdbc:mariadb://pi-dev-mariadb.cbok2weui317.ap-northeast-2.rds.amazonaws.com:3306/planit_strategy_db"
+  PLANIT_STRATEGY_DB_URL: "jdbc:mariadb://pi-dev-mariadb-strategy.cbok2weui317.ap-northeast-2.rds.amazonaws.com:3306/planit_strategy_db"
   PLANIT_SCHEDULE_SERVICE_GRPC_TARGET: "static://planit-schedule-svc:9092"
   PLANIT_USER_SERVICE_GRPC_TARGET: "static://planit-user-svc:9091"
   PLANIT_CORS_ALLOWED_ORIGINS: "https://barumi-planit.store,http://localhost:3000,http://localhost:5173"
-  SPRING_DATASOURCE_URL: "jdbc:mariadb://pi-dev-mariadb.cbok2weui317.ap-northeast-2.rds.amazonaws.com:3306/planit_strategy_db"
+  SPRING_DATASOURCE_URL: "jdbc:mariadb://pi-dev-mariadb-strategy.cbok2weui317.ap-northeast-2.rds.amazonaws.com:3306/planit_strategy_db"
   GRPC_SCHEDULE_SERVICE_ADDRESS: "static://planit-schedule-svc:9092"
   USER_SERVICE_GRPC_ADDRESS: "static://planit-user-svc:9091"
   AWS_REGION: "ap-northeast-2"

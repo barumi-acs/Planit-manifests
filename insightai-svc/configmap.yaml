@@ -7,7 +7,7 @@ data:
   APP_MODE: "grpc"
   PORT: "8085"
   GRPC_PORT: "9095"
-  DB_HOST: "pi-dev-mariadb.cbok2weui317.ap-northeast-2.rds.amazonaws.com"
+  DB_HOST: "pi-dev-mariadb-insight.cbok2weui317.ap-northeast-2.rds.amazonaws.com"
   DB_PORT: "3306"
   DB_NAME: "planit_insight_db"
   AWS_REGION: "ap-northeast-2"
