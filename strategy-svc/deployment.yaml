@@ -40,7 +40,7 @@ spec:
               secretProviderClass: planit-aws-secrets
       containers:
       - name: strategy
-        image: jybill01/planit-strategy:v0.3
+        image: 935875533840.dkr.ecr.ap-northeast-2.amazonaws.com/pi-strategy:25f3a556a3126e87fc1d32bbfeb206bebfa30845
         ports:
         - containerPort: 8083
         - containerPort: 9093
