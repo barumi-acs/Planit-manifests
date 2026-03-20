@@ -16,3 +16,4 @@ data:
   COGNITO_USER_POOL_ID: "ap-northeast-2_GKpckavjT"
   COGNITO_CLIENT_ID: "6fjoogcqkvntfr9id76geuk2m7"
   SPRING_PROFILES_ACTIVE: "dev"
+  SPRING_JPA_HIBERNATE_DDL_AUTO: "update"

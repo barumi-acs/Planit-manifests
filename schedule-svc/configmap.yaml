@@ -15,3 +15,4 @@ data:
   INSIGHT_SERVICE_GRPC_ADDRESS: "static://planit-insight-svc:9094"
   GRPC_STUB_MODE: "false"
   SPRING_PROFILES_ACTIVE: "dev"
+  SPRING_JPA_HIBERNATE_DDL_AUTO: "update"
