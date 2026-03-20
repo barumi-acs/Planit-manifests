@@ -40,7 +40,7 @@ spec:
               secretProviderClass: planit-aws-secrets
       containers:
       - name: insight
-        image: jybill01/planit-insight:v0.3
+        image: 935875533840.dkr.ecr.ap-northeast-2.amazonaws.com/pi-insight:1955cde16f3453b0b746b0f8b33a08625be137d3
         ports:
         - containerPort: 8084
         - containerPort: 9094
