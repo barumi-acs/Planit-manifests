@@ -40,7 +40,7 @@ spec:
               secretProviderClass: planit-aws-secrets
       containers:
       - name: user
-        image: 935875533840.dkr.ecr.ap-northeast-2.amazonaws.com/pi-user:58982eded2a9efc1970250feba0b68f290ce916d
+        image: 935875533840.dkr.ecr.ap-northeast-2.amazonaws.com/pi-user:0d1d9a1c086f5cac232352c4dcb38594a2aade76
         ports:
         - containerPort: 8081
         - containerPort: 9091
