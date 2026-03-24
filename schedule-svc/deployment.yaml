@@ -40,7 +40,7 @@ spec:
               secretProviderClass: planit-aws-secrets
       containers:
       - name: schedule
-        image: 935875533840.dkr.ecr.ap-northeast-2.amazonaws.com/pi-schedule:fa2593400989cbcd24f97132bb1e54ada459230b
+        image: 935875533840.dkr.ecr.ap-northeast-2.amazonaws.com/pi-schedule:8ff49f938485fa395cb6348efd955f0a1b95b4a5
         ports:
         - containerPort: 8082
         - containerPort: 9092
