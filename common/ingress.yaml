@@ -125,6 +125,22 @@ spec:
                 port:
                   number: 8083
 
+          - path: /swagger-ui
+            pathType: Prefix
+            backend:
+              service:
+                name: planit-strategy-svc
+                port:
+                  number: 8083
+
+          - path: /v3/api-docs
+            pathType: Prefix
+            backend:
+              service:
+                name: planit-strategy-svc
+                port:
+                  number: 8083
+
           - path: /insight
             pathType: Prefix
             backend:
